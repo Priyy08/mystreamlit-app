@@ -1,9 +1,13 @@
 import streamlit as st
 import requests
 import uuid
+import os
+from dotenv import load_dotenv
 
-# WEBHOOK_URL = "https://n8n.pragetx.com/webhook-test/fcdf7ff0-bbac-4231-b28a-a00134866cbd" # LOCAL WEBHOOK URL
-WEBHOOK_URL = "https://n8n.pragetx.com/webhook/fcdf7ff0-bbac-4231-b28a-a00134866cbd"
+load_dotenv()
+
+WEBHOOK_URL = os.getenv("PROD_WEBHOOK_URL")
+
 st.set_page_config(page_title="Company QA Bot", layout="centered")
 
 # Generate stable conversation id per session (but NOT storing chat messages)
@@ -50,3 +54,4 @@ if user_input:
 
     except Exception as e:
         st.chat_message("assistant").write(f"⚠️ Error: {e}")
+
